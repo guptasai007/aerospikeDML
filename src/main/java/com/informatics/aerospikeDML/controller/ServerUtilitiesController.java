@@ -22,16 +22,20 @@ public class ServerUtilitiesController {
 
 	@PostMapping("/run-shell-script/{script-name}")
 	public String runShellScript(@RequestHeader @NotNull String path,
-			@PathVariable("script-name") @NotNull String scriptName)
+			@PathVariable("script-name") @NotNull String scriptName,
+			@RequestHeader("outputMaxLines") @NotNull int commandOutputMaxLines)
 			throws Exception {
-		return serverUtilitiesService.runShellScript(path, scriptName);
+		return serverUtilitiesService.runShellScript(path, scriptName,
+				commandOutputMaxLines);
 	}
 
 	@PostMapping("/execute-command")
 	public String executeCommand(@RequestHeader @NotNull String directory,
-			@RequestHeader @NotNull String command)
+			@RequestHeader @NotNull String command,
+			@RequestHeader("outputMaxLines") @NotNull int commandOutputMaxLines)
 			throws Exception {
-		return serverUtilitiesService.executeCommand(directory, command);
+		return serverUtilitiesService.executeCommand(directory, command,
+				commandOutputMaxLines);
 	}
 
 	@PostMapping("/upload-file")
